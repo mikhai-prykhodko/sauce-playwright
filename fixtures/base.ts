@@ -9,23 +9,23 @@ import {MenuPage} from '../pages/sideMenu/menuPage';
 export const USERS = {
   standardUser: {
     username: 'standard_user',
-    password: 'secret_sauce',
+    password: process.env.PASSWORD,
   },
   lockedOutUser: {
     username: 'locked_out_user',
-    password: 'secret_sauce',
+    password: process.env.PASSWORD,
   },
   problemUser: {
     username: 'problem_user',
-    password: 'secret_sauce',
+    password: process.env.PASSWORD,
   },
   performanceGlitchUser: {
     username: 'performance_glitch_user',
-    password: 'secret_sauce',
+    password: process.env.PASSWORD,
   },
   invalidUser: {
     username: 'invalid_user',
-    password: 'invalid_password',
+    password: process.env.INCORRECT_PASSWORD,
   },
 };
 export const standardUserSession = 'sessions/standardUserSession.json';

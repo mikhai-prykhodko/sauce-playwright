@@ -1,7 +1,8 @@
 import {chromium, type FullConfig} from '@playwright/test';
 import {standardUserSession} from '../../fixtures/base';
-import fs from 'fs';
-import path from 'path';
+import * as fs from 'fs';
+import * as path from 'path';
+import 'dotenv/config';
 
 async function globalSetup(config: FullConfig) {
   const sessionsDir = path.resolve(process.cwd(), 'sessions');
@@ -15,7 +16,7 @@ async function globalSetup(config: FullConfig) {
     await context.tracing.start({screenshots: true, snapshots: true});
     await page.goto(baseURL || '');
     await page.locator('[data-test="username"]').fill('standard_user');
-    await page.locator('[data-test="password"]').fill('secret_sauce');
+    await page.locator('[data-test="password"]').fill(process.env.PASSWORD);
     await page.locator('[data-test="login-button"]').click();
     await page.waitForURL('**/inventory.html');
     await page.waitForTimeout(1000);
