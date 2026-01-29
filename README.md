@@ -16,7 +16,7 @@ A comprehensive end-to-end test automation framework for [SauceDemo](https://www
 
 ## Overview
 
-This project provides automated testing for the SauceDemo e-commerce demo application, covering critical user flows including:
+This project provides automated testing for the SauceDemo e-commerce demo application, covering the following scenarios:
 - User authentication (login/logout)
 - Product browsing and selection
 - Shopping cart management
@@ -26,13 +26,13 @@ This project provides automated testing for the SauceDemo e-commerce demo applic
 ## Features
 
 - **Page Object Model (POM)**: Clean, maintainable test architecture
-- **TypeScript**: Type-safe test code with excellent IDE support
+- **TypeScript**: Type-safe test code
 - **Custom Fixtures**: Reusable test fixtures for page objects
 - **Global Setup**: Automated session management for authenticated tests
-- **Multi-browser Support**: Tests run on Chromium, Firefox, and WebKit
-- **Parallel Execution**: Tests run in parallel for faster execution
-- **Rich Reporting**: HTML reports with screenshots, videos, and traces
-- **CI/CD Ready**: GitHub Actions workflow included
+- **Multi-browser Support**: Tests run on Chromium with the ability to run with Firefox, and WebKit
+- **Parallel Execution**: Tests run in parallel for faster execution, default is 3 workers 
+- **Reporting**: HTML reports with screenshots, videos, and traces
+- **CI/CD**: GitHub Actions workflow included
 
 
 ## Prerequisites
@@ -46,7 +46,7 @@ This project provides automated testing for the SauceDemo e-commerce demo applic
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd saucedemo
+   cd sauce-playwright
    ```
 
 2. **Install dependencies**
@@ -58,7 +58,7 @@ This project provides automated testing for the SauceDemo e-commerce demo applic
 
 3. **Install Playwright browsers**
    ```bash
-   npx playwright install
+   npx playwright install --with-deps
    ```
 
 ## Running Tests
@@ -103,10 +103,8 @@ npx playwright test --grep @shopping
 ### Run Tests in Headed Mode
 
 ```bash
-# Set environment variable
-HEADLESS=false npx playwright test
-
-# Or modify playwright.config.ts
+# Set environment variable in .env file copied from .env_example
+HEADLESS=false
 ```
 
 ### View Test Report
@@ -120,17 +118,14 @@ npx playwright show-report
 ### Other Useful Commands
 
 ```bash
-# List all tests
-npx playwright test --list
-
-# Run tests with codegen (record tests)
-npx playwright codegen https://www.saucedemo.com
-
 # Format code
-npm run format
+yarn format
 
 # Lint code
-npm run lint
+yarn lint
+
+# Rebuild the whole project
+yarn rebuild
 ```
 
 ## Why Playwright?
@@ -190,7 +185,7 @@ The `global-setup.ts` file automatically creates an authenticated session before
 
 ### Environment Variables
 
-Create a `.env` file (optional) to override defaults:
+Copy a `.env_example` file to `.env`:
 
 ```env
 BASE_URL=https://www.saucedemo.com/
@@ -206,7 +201,7 @@ Key settings in `playwright.config.ts`:
 - **Test ID Attribute**: `data-test`
 - **Timeout**: 20 seconds
 - **Retries**: 2 retries on CI
-- **Workers**: 2 parallel workers (configurable)
+- **Workers**: 3 parallel workers (configurable)
 - **Reporters**: HTML and list reporters
 
 ### Test Data
@@ -219,8 +214,9 @@ Test data is centralized in:
 
 The project includes a GitHub Actions workflow (`.github/workflows/playwright.yml`) that:
 - Runs tests on push and pull requests
-- Tests across multiple browsers
-- Generates and uploads test reports
+- Tests chromium with the ability to run on other platforms 
+- Generates and uploads html test report
+- List report for local and CI details
 - Runs in headless mode
 
 
