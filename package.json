@@ -1,0 +1,32 @@
+{
+  "name": "saucedemo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test -c playwright.config.ts --project=\"chromium\"",
+    "lint": "npx eslint --max-warnings=0",
+    "nuke": "npx rimraf node_modules",
+    "rebuild": "yarn nuke && yarn cache clean && yarn && yarn lint",
+    "format": "prettier --ignore-path .gitignore --write \"**/*.+(ts|json)\""
+  },
+  "keywords": [],
+  "author": "Mykhailo Prykhodko",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^25.1.0",
+    "eslint": "^9.8.0",
+    "eslint-formatter-compact": "^9.0.1",
+    "prettier": "^3.4.2"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^10.2.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-playwright": "^2.5.0",
+    "eslint-plugin-prettier": "^5.5.5",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.53.1"
+  }
+}
