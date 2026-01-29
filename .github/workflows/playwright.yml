@@ -24,6 +24,8 @@ jobs:
         BASE_URL: 'https://www.saucedemo.com'
         WORKERS: 3
         HEADLESS: true
+        PASSWORD: secrets.PASSWORD
+        INCORRECT_PASSWORD: secrets.INCORRECT_PASSWORD
       run: yarn test
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
